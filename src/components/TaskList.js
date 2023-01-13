@@ -1,11 +1,24 @@
 import React from "react";
+import Task from "./Task";
 
-function TaskList() {
+function TaskList({ tasks, handleDelete, selectedCategory }) {
+  // Neat use of the ternary operator with an OR statement
+  const filteredTasks = tasks.filter(task => task.category === selectedCategory || selectedCategory === "All")
+  const myTasks = filteredTasks.map(task => (
+    <Task
+      text={task.text}
+      category={task.category}
+      key={task.text}
+      handleDelete={handleDelete}
+    />
+  ))
+
   return (
     <div className="tasks">
-      {/* display a list of tasks using Task component */}
+      {myTasks}
     </div>
   );
 }
 
 export default TaskList;
+ 
